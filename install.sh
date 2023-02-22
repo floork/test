@@ -1,20 +1,18 @@
 #!/bin/bash
 
-instyay(){
-  # install yay (AUR helper)
-            sudo pacman -Syu --noconfirm
-            sudo pacman -S --noconfirm --needed git base-devel
-            git clone https://aur.archlinux.org/yay-bin.git
-            cd yay-bin
-            makepkg -si
+inst_docker(){
+    sudo apt update -y && sudo apt upgrade -y
+    curl -sSL https://get.docker.com | sh
 }
 
-install(){
-yay -S --needed --noconfirm hyprland-bin polkit-gnome ffmpeg neovim viewnior rofi pavucontrol thunar starship wl-clipboard wf-recorder swaybg grimblast-git ffmpegthumbnailer tumbler playerctl noise-suppression-for-voice thunar-archive-plugin kitty waybar-hyprland wlogout swaylock-effects sddm-git pamixer nwg-look-bin nordic-theme papirus-icon-theme dunst
+conf_docker(){
+  sudo usermod -aG docker lepotato
+  echo "you will be loged out in 2 seconds, please log back in to apply changes"
+  sleep 2s
+  logout
+# after logout run
+# docker run hello-world
 }
-inst(){
-  yay -S --noconfirm gdb ninja gcc cmake meson libxcb xcb-proto xcb-util xcb-util-keysyms libxfixes libx11 libxcomposite xorg-xinput libxrender pixman wayland-protocols cairo pango seatd libxkbcommon xcb-util-wm xorg-xwayland libinput
-}
-#instyay
-inst
+inst_docker
+conf_docker
 
